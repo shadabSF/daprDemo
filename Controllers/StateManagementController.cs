@@ -13,6 +13,7 @@ namespace dapr_poc.Controllers
         {
             _daprClient = daprClient;
         }
+
         [HttpGet("{key}")]
         public async Task<ActionResult<string>> Get(string key)
         {
