@@ -19,11 +19,11 @@ namespace dapr_poc.Controllers
             var value = await _daprClient.GetStateAsync<string>("statestore", key);
             return Ok(value);
         }
-        [HttpGet("{key}/{value}")]
-        public async Task<ActionResult> Post(string key, string value)
+        [HttpPost("savestate")]
+        public async Task<ActionResult> Post([FromBody] StateStore stateStore)
         {
-            await _daprClient.SaveStateAsync("statestore", key, value);
-            return Ok(value);
+            await _daprClient.SaveStateAsync("statestore", stateStore.Key, stateStore.Value);
+            return Ok(stateStore);
         }
     }
 }
